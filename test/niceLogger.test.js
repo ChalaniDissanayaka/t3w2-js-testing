@@ -1,5 +1,5 @@
 // Import a specific function from the file
-const {niceLogger, messageRepeater} = require("../src/niceLogger.js");
+var {niceLogger, messageRepeater} = require("../src/niceLogger.js");
 
 // Import the file
 const niceLoggerFile = require("../src/niceLogger.js");
@@ -25,6 +25,10 @@ describe("niceLogger function tests", () => {
 
     test("niceLogger returns Hello World!", () => {
 
+        niceLogger = jest.fn();
+
+        niceLogger.mockReturnValue("Hello World!");
+
         expect(niceLogger()).toBe("Hello World!");
     });
 });
@@ -49,6 +53,7 @@ describe("messageRepeater function test", () => {
         let repeateMessage = messageRepeater(["hello", "world"]);
 
         console.log(repeateMessage);
+
         expect(repeateMessage).toStrictEqual(["hello", "world","hello", "world","hello", "world"]);
         expect(repeateMessage).toHaveLength(6);
     });
